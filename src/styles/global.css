@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Warm paper foundation */
+  --color-paper: #fbf7f0;
+  --color-cream: #fffdf8;
+  --color-ink: #211a33;
+  --color-ink-soft: #5d5570;
+  --color-ink-faint: #8d86a0;
+  --color-line: #ece4d8;
+
+  /* Brand coral ramp (primary accent) */
+  --color-brand-50: #fff3ed;
+  --color-brand-100: #ffe4d6;
+  --color-brand-200: #ffc9b0;
+  --color-brand-300: #ffa27c;
+  --color-brand-400: #ff7a4d;
+  --color-brand-500: #f95e33;
+  --color-brand-600: #e6471f;
+  --color-brand-700: #bd3417;
+  --color-brand-800: #973019;
+  --color-brand-900: #7a2d18;
+
+  /* Soft, colorful shadows — no harsh black */
+  --shadow-soft: 0 1px 2px rgb(33 26 51 / 0.05), 0 8px 24px rgb(33 26 51 / 0.07);
+  --shadow-lift: 0 2px 4px rgb(33 26 51 / 0.05), 0 18px 44px rgb(33 26 51 / 0.13);
+  --shadow-pop: 0 6px 0 0 rgb(33 26 51 / 0.08);
+
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark theme — same tokens, deep violet-charcoal values */
+.dark {
+  --color-paper: #161126;
+  --color-cream: #1f1936;
+  --color-ink: #f3effa;
+  --color-ink-soft: #b2aac6;
+  --color-ink-faint: #7d7595;
+  --color-line: #322a4d;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.4), 0 18px 44px rgb(0 0 0 / 0.5);
+  --shadow-pop: 0 6px 0 0 rgb(0 0 0 / 0.35);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-paper;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-line rounded-full border-2 border-solid border-paper;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-faint;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Subtle dotted paper texture */
+  .bg-dots {
+    background-image: radial-gradient(rgb(33 26 51 / 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .dark .bg-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.055) 1px, transparent 1px);
+  }
+
+  .bg-dots-light {
+    background-image: radial-gradient(rgb(255 255 255 / 0.35) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* ---------- Keyframe animations ---------- */
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 9s ease-in-out infinite;
+  }
+
+  .animate-blob {
+    animation: blob 14s ease-in-out infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee 32s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee:focus-within {
+    animation-play-state: paused;
+  }
+
+  .animate-gradient-pan {
+    background-size: 220% 220%;
+    animation: gradient-pan 9s ease infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 2.4s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 14s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--float-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-14px) rotate(var(--float-rotate, 0deg));
+  }
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    border-radius: 58% 42% 55% 45% / 55% 48% 52% 45%;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    border-radius: 45% 55% 48% 52% / 60% 42% 58% 40%;
+    transform: translate(24px, -30px) scale(1.08) rotate(8deg);
+  }
+  66% {
+    border-radius: 52% 48% 60% 40% / 45% 58% 42% 55%;
+    transform: translate(-20px, 18px) scale(0.94) rotate(-6deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

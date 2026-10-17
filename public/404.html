@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Wealthvo — redirecting…</title>
+    <script>
+      // GitHub Pages SPA fallback: remember the deep link, then go to site root.
+      // Works for project sites (username.github.io/repo/…) because the base is
+      // derived from this file's own location.
+      try {
+        sessionStorage.setItem('redirect', window.location.href);
+        var base = window.location.href.replace(/\/[^/]*$/, '/');
+        window.location.replace(base);
+      } catch (e) {
+        window.location.replace('/');
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

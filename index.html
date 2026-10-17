@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbf7f0" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161126" />
+    <script>
+      // Restore theme + SPA deep-link before paint (GitHub Pages fallback)
+      try {
+        var __q = new URLSearchParams(location.search).get('theme');
+        var __t = __q || localStorage.getItem('wealthvo-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (__t === 'dark') document.documentElement.classList.add('dark');
+        var __r = sessionStorage.getItem('redirect');
+        if (__r && __r !== window.location.href) {
+          sessionStorage.removeItem('redirect');
+          window.history.replaceState(null, '', __r);
+        }
+      } catch (e) {}
+    </script>
+    <meta
+      name="description"
+      content="Wealthvo — a free, honest roadmap for building income from zero. Real paths, step-by-step level guides, and live experiments. No gurus, no fluff."
+    />
+    <title>Wealthvo — Level Up Your Income, Step by Step</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
